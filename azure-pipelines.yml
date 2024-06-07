@@ -24,7 +24,7 @@ stages:
       name: access_output_variable
 
   - job: SecondJob
-    dependsOn: ['FirstStageFirstJob']
+    dependsOn: ['FirstJob']
     variables:
       secondJobVar: $[ dependencies.FirstJob.outputs['set_output_variable.firstJobVar'] ] 
     steps:      
