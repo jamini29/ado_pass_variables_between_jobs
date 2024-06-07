@@ -28,5 +28,5 @@ jobs:
     secondJobVar: $[ dependencies.FirstJob.outputs['set_output_variable.firstJobVar'] ] 
   steps:      
   - bash: |
-      echo "The value of the dinamic pipeline variable 'secondJobVar' is $(secondJobVar)"
+    echo "The value of the dinamic pipeline variable 'secondJobVar' is $(secondJobVar)"
   name: access_output_variable_from_first_job
