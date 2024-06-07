@@ -21,12 +21,12 @@ jobs:
       echo $(set_output_variable.firstJobVar)
     name: access_output_variable
 
-#- job: SecondJob
-#  displayName: Second Job
-#  dependsOn: ['FirstJob']
-#  variables:
-#    secondJobV: $[ dependencies.FirstJob.outputs['setVariable.firstJobV'] ] 
-#  steps:      
-#  - bash: |
-#      echo "The value of the dinamic pipeline variable 'secondJobV' is $secondJobV"
-#      echo "The scope of variable 'secondJobV' is job SecondJob"
+- job: SecondJob
+  displayName: Second Job
+  dependsOn: ['FirstJob']
+  variables:
+    secondJobVar: $[ dependencies.FirstJob.outputs['set_output_variable.firstJobVar'] ] 
+  steps:      
+  - bash: |
+      echo "The value of the dinamic pipeline variable 'secondJobVar' is $(secondJobVar)"
+  name: access_output_variable_from_first_job
