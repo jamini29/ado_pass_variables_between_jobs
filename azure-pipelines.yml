@@ -64,9 +64,13 @@ stages:
         echo ${ORGANIZATION}
         echo ${PROJECT}
         echo ${PIPELINEID}
+        echo ${BID}
         az pipelines variable list --org ${ORGANIZATION} --project ${PROJECT} --pipeline-id ${PIPELINEID} --output json
+        az pipelines variable list --org ${ORGANIZATION} --project ${PROJECT} --pipeline-id ${BID} --output json
       env:
-        AZURE_DEVOPS_EXT_PAT: $(ado_pat)
+        AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+        # $(ado_pat)
         ORGANIZATION: $(System.TeamFoundationCollectionUri)
         PROJECT: $(System.TeamProject)
         PIPELINEID: $(System.DefinitionId)
+        BID: $(Build.BuildId)
