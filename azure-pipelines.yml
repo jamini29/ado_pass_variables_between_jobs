@@ -61,7 +61,10 @@ stages:
   - job: FirstJob
     steps:
     - bash: |
-        az pipelines variable list --org ${ORGANIZATION} --project ${PROJECT} --pipeline-id $(PIPELINEID) --output json
+        echo ${ORGANIZATION}
+        echo ${PROJECT}
+        echo ${PIPELINEID}
+        az pipelines variable list --org ${ORGANIZATION} --project ${PROJECT} --pipeline-id ${PIPELINEID} --output json
       env:
         AZURE_DEVOPS_EXT_PAT: $(ado_pat)
         ORGANIZATION: $(System.TeamFoundationCollectionUri)
