@@ -35,11 +35,11 @@ stages:
 - stage: SecondStage
   dependsOn: FirstStage
   variables: # At the stage level, the format for referencing an output variable from another stage is dependencies.STAGE.outputs['JOB.TASK.VARIABLE']
-    secondStageVar: $[ dependencies.FirstStage.outputs['FirstJob.set_output_variable.firstJobVar'] ]
+    secondStageVar: $[ stageDependencies.FirstStage.FirstJob.outputs['set_output_variable.firstJobVar'] ]
   jobs:
   - job: SecondStageFirstJob
     variables: # At the job level, the format for referencing an output variable from another stage is stageDependencies.STAGE.JOB.outputs['TASK.VARIABLE']
-      secondStageJobVar: $[ stageDependencies.FirstStage.FirstJob.outputs['set_output_variable.firstJobVar'] ]
+      secondStageJobVar: $[ dependencies.FirstStage.outputs['FirstJob.set_output_variable.firstJobVar'] ]
     steps:
     - bash: |
         echo "'secondStageVar' value is ${secondStageVar}"
