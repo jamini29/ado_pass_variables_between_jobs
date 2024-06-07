@@ -16,4 +16,4 @@ steps:
     echo "set a dynamic pipeline variable by writing to the host console:"
     echo "##vso[task.setvariable variable=dinamicV;]value_of_dinamic_V"
 - bash: |
-    "The value of the dinamic pipeline variable is $(dinamicV)"
+    echo "The value of the dinamic pipeline variable is $(dinamicV)"
