@@ -8,7 +8,7 @@ pool: 'Azure Pipelines'
 stages:
 - stage: FirstStage
   jobs:
-  - job: FirstStageFirstJob
+  - job: FirstJob
     steps:
     - bash: |
         echo "So damn, let's start"
@@ -26,7 +26,7 @@ stages:
   - job: SecondJob
     dependsOn: ['FirstStageFirstJob']
     variables:
-      secondJobVar: $[ dependencies.FirstStageFirstJob.outputs['set_output_variable.firstJobVar'] ] 
+      secondJobVar: $[ dependencies.FirstJob.outputs['set_output_variable.firstJobVar'] ] 
     steps:      
     - bash: |
         echo "The value of the dinamic pipeline variable 'secondJobVar' is $(secondJobVar)"
@@ -35,12 +35,13 @@ stages:
 - stage: SecondStage
   dependsOn: FirstStage
   variables: # At the stage level, the format for referencing an output variable from another stage is dependencies.STAGE.outputs['JOB.TASK.VARIABLE']
-    secondStageVar: $[ dependencies.FirstStage.outputs['FirstStageFirstJob.set_output_variable.firstJobVar'] ]
+    secondStageVar: $[ dependencies.FirstStage.outputs['FirstJob.set_output_variable.firstJobVar'] ]
   jobs:
   - job: SecondStageFirstJob
     variables: # At the job level, the format for referencing an output variable from another stage is stageDependencies.STAGE.JOB.outputs['TASK.VARIABLE']
-      secondStageJobVar: $[ stageDependencies.FirstStage.FirstStageFirstJob.outputs['set_output_variable.firstJobVar'] ]
+      secondStageJobVar: $[ stageDependencies.FirstStage.FirstJob.outputs['set_output_variable.firstJobVar'] ]
     steps:
     - bash: |
-        echo "'second_stage_variable' value is ${second_stage_variable}"
+        echo "'secondStageVar' value is ${secondStageVar}"
+        echo "'secondStageJobVar' value is ${secondStageJobVar}"
       name: access_from_second_stage_output_variable
