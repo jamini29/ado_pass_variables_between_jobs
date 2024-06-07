@@ -22,7 +22,7 @@ jobs:
       echo $(myJobVar)
     name: access_variable
   - bash: |
-      echo $(setOutput.myOutputJobVar)
+      echo $(set_output_variable.myOutputJobVar)
     name: access_output_variable
 
 #- job: SecondJob
