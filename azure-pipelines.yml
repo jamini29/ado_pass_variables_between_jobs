@@ -3,8 +3,17 @@ pr: none
 
 pool: 'Azure Pipelines'
 
+variables:
+  staticV: value_of_static_V
+
 steps:
 - bash: |
     echo "So damn, let's start"
   displayName: 'dummy start'
   failOnStderr: true
+
+- bash: |
+    echo "set a dynamic pipeline variable by writing to the host console:"
+    echo "##vso[task.setvariable variable=dinamicV;]value_of_dinamic_V"
+- bash: |
+    "The value of the dinamic pipeline variable is $(dinamicV)"
