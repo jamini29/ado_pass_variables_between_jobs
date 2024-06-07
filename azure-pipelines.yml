@@ -9,7 +9,7 @@ variables:
   staticV: value_of_static_V
 
 jobs:
-- job FirstJob
+- job: FirstJob
   displayName: FirstJob
   steps:
   - bash: |
