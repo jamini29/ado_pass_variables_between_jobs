@@ -17,10 +17,6 @@ stages:
         SOME_VAR="bla-bla-bla"
         echo "set output pipeline variable:"
         echo "##vso[task.setvariable variable=firstJobVar;isOutput=true]${SOME_VAR}"
-        # test
-        echo "'firstJobVar' value is ${firstJobVar}"
-        echo "'firstJobVar' value is $(firstJobVar)"
-        echo "'firstJobVar' value is $(set_output_variable.firstJobVar)"
       name: set_output_variable
     - bash: |
         echo $(set_output_variable.firstJobVar)
