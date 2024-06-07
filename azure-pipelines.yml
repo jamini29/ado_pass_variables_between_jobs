@@ -33,9 +33,12 @@ stages:
       name: access_output_variable_from_first_job
 
 - stage: SecondStage
+  variables:
+  - name: second_stage_variable
+    value: $[ stageDependencies.FirstStage.FirstStageFirstJob.outputs['set_output_variable.firstJobVar'] ]
   jobs:
   - job: SecondStageFirstJob
     steps:
     - bash: |
-        echo "SecondStageFirstJob"
+        echo "'second_stage_variable' value is ${second_stage_variable}"
       name: access_from_second_stage_output_variable
