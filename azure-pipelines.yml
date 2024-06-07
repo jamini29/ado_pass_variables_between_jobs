@@ -1,0 +1,10 @@
+trigger: none
+pr: none
+
+pool: 'Azure Pipelines'
+
+steps:
+- bash: |
+    echo "So damn, let's start"
+  displayName: 'dummy start'
+  failOnStderr: true
