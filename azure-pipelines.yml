@@ -14,21 +14,25 @@ jobs:
   steps:
   - bash: |
       echo "So damn, let's start"
-
+    displayName: "Dummy step"
   - bash: |
       SOMEVAR="bla-bla-bla"
       echo ${SOMEVAR}
       echo "set output pipeline variable:"
       echo "##vso[task.setvariable variable=firstJobV;isOutput=true]this_is_the_value"
-      echo "The value of the output pipeline variable 'firstJobV' is ${firstJobV}"
+      echo "The value of the output pipeline variable 'firstJobV' is $(setOutput.firstJobV)"
       echo "The scope of variable 'firstJobV' is job FirstJob"
+      echo "##vso[task.setvariable variable=myJobVar]this is the same job"
+      echo "##vso[task.setvariable variable=myOutputJobVar;isoutput=true]this is the same job too"
+      echo $(myJobVar)
+      echo $(setOutput.myOutputJobVar)
 
-- job: SecondJob
-  displayName: Second Job
-  dependsOn: ['FirstJob']
-  variables:
-    secondJobV: $[ dependencies.FirstJob.outputs['setVariable.firstJobV'] ] 
-  steps:      
-  - bash: |
-      echo "The value of the dinamic pipeline variable 'secondJobV' is $secondJobV"
-      echo "The scope of variable 'secondJobV' is job SecondJob"
+#- job: SecondJob
+#  displayName: Second Job
+#  dependsOn: ['FirstJob']
+#  variables:
+#    secondJobV: $[ dependencies.FirstJob.outputs['setVariable.firstJobV'] ] 
+#  steps:      
+#  - bash: |
+#      echo "The value of the dinamic pipeline variable 'secondJobV' is $secondJobV"
+#      echo "The scope of variable 'secondJobV' is job SecondJob"
