@@ -55,3 +55,13 @@ stages:
     - bash: |
         echo "'thirdStageJobVar' value is $(thirdStageJobVar)"
       name: access_first_stage_output_variable
+  - stage: FourthStage
+    dependsOn: [SecondStage, ThirdStage]
+    steps:
+    - bash: |
+        az pipelines variable list --org ${ORGANIZATION} --project ${PROJECT} --pipeline-id $(PIPELINEID) --output json
+      env:
+        AZURE_DEVOPS_EXT_PAT: $(ado_pat)
+        ORGANIZATION: $(System.TeamFoundationCollectionUri)
+        PROJECT: $(System.TeamProject)
+        PIPELINEID: $(System.DefinitionId)
