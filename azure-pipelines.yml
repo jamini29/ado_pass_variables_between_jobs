@@ -1,7 +1,9 @@
 #trigger: none
 trigger:
 - main
-pr: none
+#pr: none
+pr:
+- main
 
 pool: 'Azure Pipelines'
 
