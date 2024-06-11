@@ -69,6 +69,7 @@ stages:
         echo ${BID}
         az pipelines variable list --org ${ORGANIZATION} --project ${PROJECT} --pipeline-id ${PIPELINEID} --output json
         az pipelines variable list --org ${ORGANIZATION} --project ${PROJECT} --pipeline-id ${BID} --output json
+        echo "test"
       env:
         AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
         # $(ado_pat)
